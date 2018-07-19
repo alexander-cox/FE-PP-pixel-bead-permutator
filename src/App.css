@@ -1,15 +1,47 @@
 
 /* As hex codes */
 
-p, body, h1 {
-  border-style: solid;
-  border-color: rgba(  50, 50, 50);
+@font-face {
+  font-family: 'pixel';
+  font-style: normal;
+  src: local('pixel'), url(./fonts/pixel.ttf) format('truetype');
 }
+
+p, body, h1 {
+  /* border-style: solid;
+  border-color: rgb(150, 50, 50); */
+}
+
+.background-colour-neutral { background-color: rgba(  90, 90, 90) }
+
+.background-color-primary-0 { background-color: #B96A43 !important }	/* Main Primary background-color */
+.background-color-primary-1 { background-color: #F4C5AE !important}
+.background-color-primary-2 { background-color: #DB9979 }
+.background-color-primary-3 { background-color: #9F4B22 }
+.background-color-primary-4 { background-color: #822E06 }
+
+.background-color-secondary-1-0 { background-color: #B9A243 }	/* Main Secondary background-color (1) */
+.background-color-secondary-1-1 { background-color: #F4E7AE }
+.background-color-secondary-1-2 { background-color: #DBC779 }
+.background-color-secondary-1-3 { background-color: #9F8622 }
+.background-color-secondary-1-4 { background-color: #826A06 }
+
+.background-color-secondary-2-0 { background-color: #453980 }	/* Main Secondary background-color (2) */
+.background-color-secondary-2-1 { background-color: #867FA9 }
+.background-color-secondary-2-2 { background-color: #665C97 }
+.background-color-secondary-2-3 { background-color: #2F226E }
+.background-color-secondary-2-4 { background-color: #1B0F5A }
+
+.background-color-complement-0 { background-color: #2D7C60 }	/* Main Complement background-color */
+.background-color-complement-1 { background-color: #75A493 }
+.background-color-complement-2 { background-color: #51937B }
+.background-color-complement-3 { background-color: #176B4D }
+.background-color-complement-4 { background-color: #04573A }
 
 .rgba-colour-neutral { color: rgba(  50, 50, 50) }
 
-.color-primary-0 { color: #B96A43 }	/* Main Primary color */
-.color-primary-1 { color: #F4C5AE }
+.color-primary-0 { color: #B96A43 !important }	/* Main Primary color */
+.color-primary-1 { color: #F4C5AE !important}
 .color-primary-2 { color: #DB9979 }
 .color-primary-3 { color: #9F4B22 }
 .color-primary-4 { color: #822E06 }
