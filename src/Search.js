@@ -3,7 +3,7 @@ import './Search.css';
 
 class Search extends Component {
     state = { 
-
+        solutions: []
      }
     render() { 
         return ( 
@@ -11,9 +11,11 @@ class Search extends Component {
                 <div className="hero background-color-secondary-1-2">
                     <p>Search for Solutions</p>
                 </div>
+                <div>
+                </div>
             </div>
          );
-    }
+    }   
 }
  
 export default Search;
