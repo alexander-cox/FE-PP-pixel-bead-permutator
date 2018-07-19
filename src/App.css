@@ -1,17 +1,20 @@
 
-/* As hex codes */
-
 @font-face {
   font-family: 'pixel';
   font-style: normal;
   src: local('pixel'), url(./fonts/pixel.ttf) format('truetype');
 }
 
-p, body, h1 {
-  /* border-style: solid;
-  border-color: rgb(150, 50, 50); */
+p {
+  color: black;
+  font-family: pixel;
 }
 
+.hero {
+  text-align: center;
+}
+
+/* colour pallete */
 .background-colour-neutral { background-color: rgba(  90, 90, 90) }
 
 .background-color-primary-0 { background-color: #B96A43 !important }	/* Main Primary background-color */

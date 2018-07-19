@@ -10,12 +10,12 @@ const Title = () => {
     return (
         <nav id='toptitle' class="level title background-colour-neutral">
             <div className="level-left">
-                <div class="level-item">
+                <div class="level-item has-text-centered">
                     <p class="heading"><Link to='/' >Pixel Bead Permutator</Link></p>
                 </div>
             </div>
             <div className="level-right">
-                <div class="level-item">
+                <div class="level-item has-text-centered">
                     <p class="heading"><Link to='' >User</Link></p>
                 </div>
             </div>
