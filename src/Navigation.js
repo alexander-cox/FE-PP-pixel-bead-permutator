@@ -7,18 +7,18 @@ import './Navigation.css';
 
 const Navigation = () => {
     return (
-        <nav id="topnav" class="level">
-                <div class="level-item has-text-centered background-color-primary-2">
-                    <p class="heading nav"><Link to='/create' >CREATE</Link></p>
+        <nav id="topnav" className="level">
+                <div className="level-item has-text-centered background-color-primary-2">
+                    <p className="heading nav"><Link to='/create' >CREATE</Link></p>
                 </div>
-                <div class="level-item has-text-centered background-color-secondary-1-2">
-                    <p class="heading nav"><Link to='/search' >SEARCH</Link></p>
+                <div className="level-item has-text-centered background-color-secondary-1-2">
+                    <p className="heading nav"><Link to='/search' >SEARCH</Link></p>
                 </div>
-                <div class="level-item has-text-centered background-color-secondary-2-2">
-                    <p class="heading nav"><Link to='/favourites' >FAVOURITES</Link></p>
+                <div className="level-item has-text-centered background-color-secondary-2-2">
+                    <p className="heading nav"><Link to='/favourites' >FAVOURITES</Link></p>
                 </div>
-                <div class="level-item has-text-centered background-color-complement-2">
-                    <p class="heading nav"><Link to='/inventory' >INVENTORY</Link></p>
+                <div className="level-item has-text-centered background-color-complement-2">
+                    <p className="heading nav"><Link to='/inventory' >INVENTORY</Link></p>
                 </div>
         </nav>
     );
