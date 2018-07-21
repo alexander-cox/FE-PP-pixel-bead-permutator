@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Footer.css';
 const Footer = () => {
     return (
-        <footer className="footer background-colour-neutral">
+        <footer className="footer background-colour-neutral is-fixed">
             <div className="content has-text-centered">
                 <p>
                     <strong>Pixel Bead Permutator</strong> by <a href="https://github.com/Alexander-Cox">Alexander Cox</a>.
