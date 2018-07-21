@@ -1,0 +1,13 @@
+#search {
+    min-height: 20rem;
+}
+
+#SearchForm {
+    width: 50%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.searchinput select:focus {
+    border-color: #ce9212 !important;
+}
