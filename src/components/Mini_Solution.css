@@ -1,0 +1,18 @@
+
+.media {
+    margin: 1rem;
+    background-color: white;
+}
+
+.box {
+    margin: 1rem;
+    border-style: solid;
+    border-color: #826A06;
+    border-width: 1px;
+}
+
+.solution_image {
+    border-style: solid;
+    border-color: #826A06;
+    border-width: 1px;
+}

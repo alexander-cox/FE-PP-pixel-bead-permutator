@@ -7,7 +7,7 @@ const Solutions = (props) => {
     return ( 
         <div className="solutions background-color-secondary-1-3">
             {
-                props.solutions.map(s => <h1 key={s.id}>{s.title}</h1>)
+                props.solutions.map(s => <Mini_Solution solution={s} />)
             }
         </div>
      );
