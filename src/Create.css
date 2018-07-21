@@ -1,0 +1,13 @@
+#CreateForm {
+    width: 50%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.is-horizontal-center {
+    justify-content: center;
+  }
+
+  .button-create {
+      width: 30rem;
+  }
