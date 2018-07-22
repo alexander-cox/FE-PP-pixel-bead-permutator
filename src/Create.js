@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Pixel_Board from './components/Pixel_Board';
 import './Create.css';
+import logo from './images/PBP-logo-3.png';
 
 class Create extends Component {
-    state = {}
+    state = {
+        image_url: logo
+    }
     render() {
         return (
             <div className="background-color-primary-0">
@@ -20,8 +23,8 @@ class Create extends Component {
                             <input className="button button-create" type="submit" value="Load Image" />
                         </div>
                         <div className='card-content is-flex is-horizontal-center'>
-                            <figure className="image is-128x128">
-                                <img src="https://bulma.io/images/placeholders/128x128.png" />
+                            <figure className="image is-128x128 create-image">
+                                <img src={this.state.image_url} />
                             </figure>
                         </div>
                         <div className="columns">

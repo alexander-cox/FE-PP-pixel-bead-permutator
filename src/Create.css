@@ -11,3 +11,9 @@
   .button-create {
       width: 30rem;
   }
+
+  .create-image {
+      background-color: white;
+      border-style: solid;
+      border-color: black;
+  }
