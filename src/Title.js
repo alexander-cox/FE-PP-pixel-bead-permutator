@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom'
 import './Title.css'
 
-const Title = () => {
+const Title = (props) => {
+    const {username, image_url} = props;
     return (
         <nav id='toptitle' className="level title background-colour-neutral">
             <div className="level-left">
@@ -19,10 +20,10 @@ const Title = () => {
             </div>
             <div className="level-right">
                 <div className="level-item has-text-centered">
-                    <p className="heading"><Link to='/' >User</Link></p>
+                    <p className="heading"><Link to='/' >{"User: " + (username || "New User")}</Link></p>
                 </div>
                 <figure class="image is-48x48 title-image">
-                    <img src="https://bulma.io/images/placeholders/128x128.png" />
+                    <img src={image_url || require( "./images/default_avatar.png")} />
                 </figure>
             </div>
         </nav>
