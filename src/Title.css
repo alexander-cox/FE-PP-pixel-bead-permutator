@@ -5,3 +5,14 @@
 #toptitle {
     margin-bottom: 0
 }
+
+
+#app-name {
+    padding-left: 1rem;
+}
+
+.title-image {
+    background-color: rgb(200,200,200);
+    border-color: black;
+    border-style: groove;
+}
