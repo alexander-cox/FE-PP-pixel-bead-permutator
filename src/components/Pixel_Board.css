@@ -1,0 +1,20 @@
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(100,11px);
+    grid-template-columns: repeat(100,11px);
+    grid-gap: 0px;
+    position: relative;
+    margin: auto;
+}
+
+.grid-item {
+    border-style: solid;
+    border-color: black;
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+#pixelboard {
+    margin: auto;
+    width: 1100px;
+}
