@@ -12,3 +12,7 @@
 .searchinput select:focus {
     border-color: #ce9212 !important;
 }
+
+#search-results {
+    padding-bottom: 1rem;
+}

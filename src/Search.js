@@ -57,7 +57,7 @@ class Search extends Component {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div id="search-results">
                     <Solutions solutions={this.state.solutions} />
                 </div>
             </div>
