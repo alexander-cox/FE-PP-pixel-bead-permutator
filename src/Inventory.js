@@ -17,21 +17,23 @@ class Inventory extends Component {
     }
 
     fetchInventoryData = (user_id) => {
-        fetch(`http://localhost:3000/api/inventory/${user_id}`)
-            .then((items) => {
-                return Promise.all([items.json(), fetch('http://localhost:3000/api/beads')])
-            })
+        Promise.all([
+            fetch(`http://localhost:3000/api/inventory/${user_id}`),
+            fetch('http://localhost:3000/api/beads')
+        ])
             .then(([items, beads]) => {
-                return Promise.all([items, beads.json()])
+                return Promise.all([items.json(), beads.json()])
             })
             .then(([items, beads]) => {
                 const curr_beadsIds = items.map(item => item.bead_id);
                 const new_beads = beads.filter(bead => curr_beadsIds.indexOf(bead.id) === -1);
-                return Promise.all([items, new_beads])
-            })
-            .then(([items, new_beads]) => {
                 return this.setState({ items, new_beads })
             });
+    }
+
+    resetInventoryState = () => {
+        const { user_id } = this.state
+        this.fetchInventoryData(user_id);
     }
 
     getTotalBeads = () => {
@@ -42,7 +44,7 @@ class Inventory extends Component {
     }
 
     putInventoryBeadsUp(event) {
-        const {target} = event;
+        const { target } = event;
         return console.dir(target);
     }
 
@@ -82,14 +84,14 @@ class Inventory extends Component {
                 <div className="background-color-complement-0">
                     <div id="inventoryContent">
                         <h1>{"Showing beads for " + username + ": " + total + " Beads Total"}</h1>
-                        <Pictogram items={items} total={total} />
+                        <Pictogram items={items} total={total} resetInventoryState={this.resetInventoryState} />
                         <div className="inventory-add background-color-complement-3">
                             <h1 id="inv_id_h1">Add To Your Inventory:</h1>
                             <div class="bead_shop">
-                            {
-                                this.displayMoreBeads()
-                            }
-                        </div>
+                                {
+                                    this.displayMoreBeads()
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
