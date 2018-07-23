@@ -72,7 +72,8 @@ class Inventory extends Component {
     }
 
     render() {
-        const { username, items, getTotalBeads } = this.state;
+        const { username, items } = this.state;
+        const total = this.getTotalBeads();
         return (
             <div>
                 <div className="hero background-color-complement-2">
@@ -80,8 +81,8 @@ class Inventory extends Component {
                 </div>
                 <div className="background-color-complement-0">
                     <div id="inventoryContent">
-                        <h1>{"Showing beads for " + username + ": " + this.getTotalBeads() + " Beads Total"}</h1>
-                        <Pictogram items={items} total={this.getTotalBeads()} />
+                        <h1>{"Showing beads for " + username + ": " + total + " Beads Total"}</h1>
+                        <Pictogram items={items} total={total} />
                         <div className="inventory-add background-color-complement-3">
                             <h1 id="inv_id_h1">Add To Your Inventory:</h1>
                             <div class="bead_shop">
