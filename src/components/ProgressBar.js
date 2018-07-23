@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
 
 class ProgressBar extends Component {
-    state = { 
+    state = {
+        id: 0,
         bead_id: 0,
         quantity: 0,
         total: 0,
         r: 90,
         g: 90,
         b: 90,
-        amount: 0,
+        amount: '',
         colour_name: ''
     }
     componentDidMount = () => {
-        const {bead, total} = this.props;
-        const {bead_id, quantity, r, g, b, colour_name} = bead;
-        this.setState({bead_id, quantity, r, g, b, colour_name, total});
+        const { bead, total } = this.props;
+        const { id, bead_id, quantity, r, g, b, colour_name } = bead;
+        this.setState({ id, bead_id, quantity, r, g, b, colour_name, total });
     }
-    render() { 
-        const {bead_id, quantity, r, g, b, total, colour_name} = this.state;
-        return ( 
-            <div key={bead_id} class="box">
+    componentDidUpdate = (prevProps) => {
+        if (this.props.total !== prevProps.total) {
+            const { bead, total } = this.props;
+            const { id, bead_id, quantity, r, g, b, colour_name } = bead;
+            this.setState({ id, bead_id, quantity, r, g, b, colour_name, total, amount: '' });
+          }
+    }
+
+    handleAmountChange = (event) => {
+        const { target: { value } } = event;
+        this.setState({ amount: value });
+    }
+    handleIncrement = () => {
+        const { id, amount } = this.state;
+        const increment = +amount;
+        if (increment > 0) {
+            fetch(`http://localhost:3000/api/inventory/${id}/?amount=${increment}`, { method: 'PUT' })
+                .then(() => {
+                    return this.props.resetInventoryState();
+                })
+        }
+    }
+
+    handleDecrement = () => {
+        const { id, amount } = this.state;
+        const decrement = +amount;
+        if (decrement > 0) {
+            fetch(`http://localhost:3000/api/inventory/${id}/?amount=${decrement}&decrement=true`, { method: 'PUT' })
+                .then(() => {
+                    return this.props.resetInventoryState();
+                })
+        }
+    }
+
+    render() {
+        const { id, bead_id, quantity, r, g, b, total, colour_name, amount } = this.state;
+        return (
+            <div class="box">
                 <div class="columns">
                     <div class="column is-one-quarter">
                         <p className="p-beads">{colour_name}:</p>
@@ -29,13 +64,13 @@ class ProgressBar extends Component {
                         <progress class="progress is-small" value={quantity} max={total}></progress>
                     </div>
                     <div class="column is-one-quarter">
-                        <input id="amount" class="input is-small" type="text" placeholder="Amount"  />
-                        <a key={bead_id} class="button is-danger is-small">-</a>
-                        <a key={bead_id} class="button is-primary is-small">+</a>
+                        <input id="amount" class="input is-small" type="text" placeholder="Amount" onChange={this.handleAmountChange} value={amount} />
+                        <a class="button is-danger is-small" onClick={this.handleDecrement}>-</a>
+                        <a class="button is-primary is-small" onClick={this.handleIncrement}>+</a>
                     </div>
                 </div>
             </div>
-         )
+        )
     }
 }
 
