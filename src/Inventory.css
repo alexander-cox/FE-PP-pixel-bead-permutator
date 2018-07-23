@@ -1,0 +1,52 @@
+#inventoryContent {
+    width: 50%;
+    margin: auto;
+}
+
+#inventoryContent h1 {
+    padding-top: 1rem;
+    font-size: 2rem;
+    font-family: 'pixel';
+    color: black;
+}
+
+#amount {
+    width: 50%;
+}
+
+.p-beads {
+    display: inline-block;
+}
+
+#bead-quantity {
+    margin-left:1rem;
+}
+
+.progress {
+    border-style: ridge;
+    /* border-color: black; */
+}
+
+.progress-div, .bead-colour-div {
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.inventory-add {
+    margin-top: 5%;
+}
+
+#inv_id_h1 {
+    padding-left: 2rem;
+}
+
+.p-inv {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.bead_shop {
+    padding-bottom: 1rem;
+}
