@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './Home';
 
 class Home extends Component {
-    state = {}
+    state = {
+        isLoggedIn: true
+    }
     render() {
         return (
             <div>
