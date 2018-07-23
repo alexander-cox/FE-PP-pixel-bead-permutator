@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Inventory.css';
+import Pictogram from './components/Pictogram';
 
 class Inventory extends Component {
     state = {
@@ -30,7 +31,7 @@ class Inventory extends Component {
             })
             .then(([items, new_beads]) => {
                 return this.setState({ items, new_beads })
-            })
+            });
     }
 
     getTotalBeads = () => {
@@ -40,31 +41,12 @@ class Inventory extends Component {
         }, 0);
     }
 
-    displayProgressBars = () => {
-        const total = this.getTotalBeads();
-        const { items } = this.state;
-        const progressBars = items.map((item) => {
-            return (
-                <div class="box">
-                    <div class="columns">
-                        <div class="column is-one-quarter">
-                            <p className="p-beads">{item.colour_name}:</p>
-                            <p id="bead-quantity" className="p-beads">{item.quantity} Beads</p>
-                        </div>
-                        <div class="column is-one-half progress-div" style={{ backgroundColor: `rgb(${item.r},${item.g},${item.b})` }}>
-                            <progress class="progress is-small" value={item.quantity} max={total}></progress>
-                        </div>
-                        <div class="column is-one-quarter">
-                            <input id="amount" class="input is-small" type="text" placeholder="Amount" />
-                            <a class="button is-danger is-small">-</a>
-                            <a class="button is-primary is-small">+</a>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-        return progressBars;
+    putInventoryBeadsUp(event) {
+        const {target} = event;
+        return console.dir(target);
     }
+
+
 
     displayMoreBeads = () => {
         const { new_beads } = this.state;
@@ -90,7 +72,7 @@ class Inventory extends Component {
     }
 
     render() {
-        const { username } = this.state;
+        const { username, items, getTotalBeads } = this.state;
         return (
             <div>
                 <div className="hero background-color-complement-2">
@@ -99,11 +81,7 @@ class Inventory extends Component {
                 <div className="background-color-complement-0">
                     <div id="inventoryContent">
                         <h1>{"Showing beads for " + username + ": " + this.getTotalBeads() + " Beads Total"}</h1>
-                        <div class="pictogram">
-                            {
-                                this.displayProgressBars()
-                            }
-                        </div>
+                        <Pictogram items={items} total={this.getTotalBeads()} />
                         <div className="inventory-add background-color-complement-3">
                             <h1 id="inv_id_h1">Add To Your Inventory:</h1>
                             <div class="bead_shop">

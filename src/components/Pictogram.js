@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import ProgressBar from './ProgressBar';
 import './Pictogram.css';
 
-class Pictogram extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <div>
-                
-            </div>
-         );
-    }
+const Pictogram = (props) => {
+    const { items, total } = props;
+    return (
+        <div class="pictogram">
+            {
+                items.map((item) => {
+                    return (
+                        <ProgressBar bead={item} total={total} />
+                    )
+                })
+            }
+        </div>
+    );
 }
- 
+
 export default Pictogram;
