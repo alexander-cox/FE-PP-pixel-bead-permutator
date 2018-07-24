@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Solution.css';
 import Pixel_Board from './components/Pixel_Board';
 import Pictogram from './components/Pictogram';
+import BeadSummary from './components/BeadSummary';
 
 class Solution extends Component {
     state = {
@@ -19,18 +20,24 @@ class Solution extends Component {
         users_id: 0,
         votes: 0,
         width_px: 0,
-        beads: []
+        beads: [],
+        items: [],
+        beadInfo: []
     }
     componentDidMount = () => {
         const { match: { params: { solution_id } } } = this.props;
         return Promise.all([
             fetch(`http://localhost:3000/api/solutions/${solution_id}`),
-            fetch(`http://localhost:3000/api/beads/${solution_id}`)])
-            .then(([solutions, beads]) => Promise.all([solutions.json(), beads.json()])
-            .then(([solution, beads]) => {
-                return this.setState({...solution, beads});
-            })
-        );
+            fetch(`http://localhost:3000/api/beads/${solution_id}`),
+            fetch('http://localhost:3000/api/beads')])
+            .then(([solutions, beads, beadInfo]) => Promise.all([solutions.json(), beads.json(), beadInfo.json()])
+                .then(([solution, beads, beadInfo]) => {
+                    return this.setState({ ...solution, beads, beadInfo });
+                })
+                .then(() => {
+                    return this.summarizeBeads();
+                })
+            );
     }
 
     splitTagsToComponents = () => {
@@ -49,8 +56,30 @@ class Solution extends Component {
         )
     }
 
+    summarizeBeads = () => {
+        const { beads, beadInfo } = this.state;
+        const items = beads.reduce((acc, bead) => {
+            const tempColour = acc.find(colour => {
+                return colour.bead_id === bead.bead_id;
+            })
+            if (tempColour) {
+                tempColour.quantity++;
+            } else if (bead.colour_name !== null){
+                acc.push({ ...bead, quantity: 1 });
+            }
+            return acc;
+        }, [])
+        .sort((a, b) => b.quantity - a.quantity)
+        .map((bead) => {
+            const beadObj = beadInfo.find(b => b.id === bead.bead_id);
+            const { brand, style, size } = beadObj;
+            return {...bead, brand, style, size};
+        })
+        this.setState({ items })
+    }
+
     render() {
-        const { title, avatar_url, username, image_url, beads, width_px, height_px } = this.state;
+        const { title, avatar_url, username, image_url, beads, width_px, height_px, items } = this.state;
         return (
             <div id="solution" className="background-color-secondary-1-0">
                 <div className="hero background-color-secondary-1-1">
@@ -87,10 +116,23 @@ class Solution extends Component {
                     </div>
                 </div>
                 <div id="pixelBoard-div">
-                        <Pixel_Board board={beads} width={width_px} height={height_px} />
-                    </div>
+                    <Pixel_Board board={beads} width={width_px} height={height_px} />
+                </div>
                 <div id="solutionContent" className="">
-                   <Pictogram items={[]} />
+                    <div className="hero background-color-secondary-1-1">
+                        <p>Beads Summary:</p>
+                    </div>
+                    <div class="bead_shop">
+                        {
+                            items.map((item) => {
+                                return (
+                                    <BeadSummary bead={item} />
+                                )
+                            })
+                        }
+
+                    </div>
+
                 </div>
             </div>
         );
