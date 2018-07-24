@@ -22,7 +22,8 @@ class Solution extends Component {
         width_px: 0,
         beads: [],
         items: [],
-        beadInfo: []
+        beadInfo: [],
+        hasVotedUp: false
     }
     componentDidMount = () => {
         const { match: { params: { solution_id } } } = this.props;
@@ -78,8 +79,25 @@ class Solution extends Component {
         this.setState({ items })
     }
 
+    handleVote = () => {
+        const { hasVotedUp, id } = this.state;
+        if(!hasVotedUp) {
+            fetch(`http://localhost:3000/api/solutions/${id}/votes`, { method: 'PUT'})
+            .then(res => res.json())
+            .then(({votes}) => {
+                this.setState({ hasVotedUp: !hasVotedUp, votes });
+            })
+        } else {
+            fetch(`http://localhost:3000/api/solutions/${id}/votes?decrement=true`, { method: 'PUT'})
+            .then(res => res.json())
+            .then(({votes}) => {
+                this.setState({ hasVotedUp: !hasVotedUp, votes });
+            })
+        }
+    }
+
     render() {
-        const { title, avatar_url, username, image_url, beads, width_px, height_px, items } = this.state;
+        const { title, avatar_url, username, image_url, beads, width_px, height_px, items, votes, hasVotedUp } = this.state;
         return (
             <div id="solution" className="background-color-secondary-1-0">
                 <div className="hero background-color-secondary-1-1">
@@ -92,6 +110,8 @@ class Solution extends Component {
                             this.splitTagsToComponents()
                         }
                     </div>
+                    <h1>Votes: {votes}</h1>
+                    <button class="button" onClick={this.handleVote}>{!hasVotedUp? "Vote Up": "Unvote"}</button>
                     <div className="hero background-color-secondary-1-1">
                         <p>Created By:</p>
                     </div>
