@@ -10,46 +10,41 @@ class Pixel_Board extends Component {
     }
 
     componentDidMount() {
-       const { board, width, height } = this.props;
-       //const sortedBoard = this.prepArrForCSSGrid(board);
-       const grid_styles = this.generateGridStyling(width, height);
-       return this.setState({ board, width, height, grid_styles});
+        const { board, width, height } = this.props;
+        const grid_styles = this.generateGridStyling(width, height);
+        return this.setState({ board, width, height, grid_styles });
     }
 
     componentDidUpdate = (prevProps) => {
         if (this.props.board.length !== prevProps.board.length) {
             const { board, width, height } = this.props;
-            //const sortedBoard = this.prepArrForCSSGrid(board);
             const grid_styles = this.generateGridStyling(width, height);
-            return this.setState({ board, width, height, grid_styles});
+            return this.setState({ board, width, height, grid_styles });
         }
     }
 
-    prepArrForCSSGrid(beadArr) {
-        let arr = [...beadArr];
-        return arr.sort((a, b) => {
-            const n = a.y - b.y;
-            if (n !== 0) {
-                return n;
-            }
-            return a.x - b.x;
-        });
-    }
-
     generateGridStyling(w, h) {
-        return { width: `${w * 11}px`, 
+        return {
+            width: `${w * 11}px`,
             gridTemplateRows: `repeat(${h}, 11px)`,
-            gridTemplateColumns: `repeat(${w}, 11px)`};
+            gridTemplateColumns: `repeat(${w}, 11px)`
+        };
     }
 
     render() {
-        const { board, grid_styles} = this.state;
+        const { board, grid_styles } = this.state;
         return (
             <div id="pixelboard" className="">
                 <div className="grid-container" style={grid_styles}>
                     {
                         board.map(pix => {
-                            return <div key={pix.id} className="grid-item" style={{backgroundColor: `rgb(${pix.r}, ${pix.g}, ${pix.b})`}}>{pix.bead_id}</div>   
+                            return (
+                                <div key={pix.id} className={`grid-item ${pix.colour_name ? pix.colour_name : 'empty'}`} style={{ backgroundColor: `rgb(${pix.r}, ${pix.g}, ${pix.b})` }}>
+                                    <p>{pix.bead_id}</p>
+                                    <p>{pix.colour_name}</p>
+                                    <p>{"("+ pix.x + "," + pix.y + ")"}</p>
+                                </div>
+                            )
                         })
                     }
                 </div>

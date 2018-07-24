@@ -87,7 +87,7 @@ class Solution extends Component {
                     </div>
                 </div>
                 <div id="pixelBoard-div">
-                        <Pixel_Board board={beads} width={60} height={60} />
+                        <Pixel_Board board={beads} width={width_px} height={height_px} />
                     </div>
                 <div id="solutionContent" className="">
                    <Pictogram items={[]} />
