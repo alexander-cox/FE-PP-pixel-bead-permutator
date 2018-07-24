@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Inventory.css';
 import Pictogram from './components/Pictogram';
+import AdditionalBead from './components/AdditionalBead';
 
 class Inventory extends Component {
     state = {
@@ -48,33 +49,8 @@ class Inventory extends Component {
         return console.dir(target);
     }
 
-
-
-    displayMoreBeads = () => {
-        const { new_beads } = this.state;
-        const addBeads = new_beads.map((bead) => {
-            return (
-                <div class="box">
-                    <div class="columns">
-                        <div class="column bead-colour-div" style={{ backgroundColor: `rgb(${bead.r},${bead.g},${bead.b})` }}>
-                            <p className="p-inv">Brand: {bead.brand}</p>
-                            <p className="p-inv">Colour: {bead.colour_name}</p>
-                            <p className="p-inv">Style: {bead.style}</p>
-                            <p className="p-inv">Size: {bead.size}</p>
-                        </div>
-                        <div class="column is-one-quarter">
-                            <input id="amount" class="input is-small" type="text" placeholder="Amount" />
-                            <a class="button is-primary is-small">+</a>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-        return addBeads;
-    }
-
     render() {
-        const { username, items } = this.state;
+        const { username, items, new_beads } = this.state;
         const total = this.getTotalBeads();
         return (
             <div>
@@ -89,8 +65,13 @@ class Inventory extends Component {
                             <h1 id="inv_id_h1">Add To Your Inventory:</h1>
                             <div class="bead_shop">
                                 {
-                                    this.displayMoreBeads()
+                                    new_beads.map((bead) => {
+                                        return (
+                                            <AdditionalBead bead={bead} />
+                                        )
+                                    })
                                 }
+
                             </div>
                         </div>
                     </div>
