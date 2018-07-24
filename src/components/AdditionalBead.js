@@ -10,7 +10,7 @@ class AdditionalBead extends Component {
         bead_id: 0,
         colour_name: '',
         style: '',
-        size: ''
+        size: '',
     }
 
     componentDidMount = () => {
@@ -20,7 +20,7 @@ class AdditionalBead extends Component {
 
     handleChange = (event) => {
         const { target: { value } } = event;
-        this.setState({ value });
+        this.setState({ amount: value });
     }
 
     render() {
