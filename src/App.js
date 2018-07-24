@@ -31,7 +31,7 @@ class App extends Component {
         <Route exact path="/" component={Home}/>
         <Route path="/create" component={Create}/>
         <Route path="/search" component={Search}/>
-        <Route path="/solution/:id" component={Solution}/>
+        <Route path="/solutions/:solution_id" component={Solution}/>
         <Route path="/favourites" render={() => <Favourites username={username} user_id={user_id} />}/>
         <Route path="/inventory" render={() => <Inventory username={username} user_id={user_id} />}/>
         <Footer />

@@ -1,10 +1,11 @@
 .grid-container {
     display: grid;
-    grid-template-rows: repeat(100,11px);
-    grid-template-columns: repeat(100,11px);
+    /* grid-template-rows: repeat(100,11px);
+    grid-template-columns: repeat(100,11px); */
     grid-gap: 0px;
     position: relative;
     margin: auto;
+    background-color: white;
 }
 
 .grid-item {
@@ -16,5 +17,4 @@
 
 #pixelboard {
     margin: auto;
-    width: 1100px;
 }
