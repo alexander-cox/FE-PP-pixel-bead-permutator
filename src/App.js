@@ -22,20 +22,20 @@ class App extends Component {
     image_url: 'https://pbs.twimg.com/profile_images/691705411939012609/YHZlX_97_400x400.jpg'
   }
   render() {
-    const {username, user_id, image_url} = this.state;
+    const { username, user_id, image_url } = this.state;
     return (
       <Router>
-      <div className="App">
-        <Title username={username} image_url={image_url} />
-        <Navigation />
-        <Route exact path="/" component={Home}/>
-        <Route path="/create" component={Create}/>
-        <Route path="/search" component={Search}/>
-        <Route path="/solutions/:solution_id" component={Solution}/>
-        <Route path="/favourites" render={() => <Favourites username={username} user_id={user_id} />}/>
-        <Route path="/inventory" render={() => <Inventory username={username} user_id={user_id} />}/>
-        <Footer />
-      </div>
+        <div className="App">
+          <Title username={username} image_url={image_url} />
+          <Navigation />
+          <Route exact path="/" component={Home} loggedIn_id={user_id} />
+          <Route path="/create" component={Create} loggedIn_id={user_id} />
+          <Route path="/search" component={Search} loggedIn_id={user_id} />
+          <Route path="/solutions/:solution_id" render={(props) => <Solution loggedIn_id={user_id} {...props} />} />
+          <Route path="/favourites" render={() => <Favourites username={username} user_id={user_id} />} />
+          <Route path="/inventory" render={() => <Inventory username={username} user_id={user_id} />} />
+          <Footer />
+        </div>
       </Router>
     );
   }

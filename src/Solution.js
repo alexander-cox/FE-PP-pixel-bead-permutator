@@ -23,17 +23,19 @@ class Solution extends Component {
         beads: [],
         items: [],
         beadInfo: [],
-        hasVotedUp: false
+        hasVotedUp: false,
+        hasFavourited: false,
+        loggedIn_id: ''
     }
     componentDidMount = () => {
-        const { match: { params: { solution_id } } } = this.props;
+        const { match: { params: { solution_id } }, loggedIn_id } = this.props;
         return Promise.all([
             fetch(`http://localhost:3000/api/solutions/${solution_id}`),
             fetch(`http://localhost:3000/api/beads/${solution_id}`),
             fetch('http://localhost:3000/api/beads')])
             .then(([solutions, beads, beadInfo]) => Promise.all([solutions.json(), beads.json(), beadInfo.json()])
                 .then(([solution, beads, beadInfo]) => {
-                    return this.setState({ ...solution, beads, beadInfo });
+                    return this.setState({ ...solution, beads, beadInfo, loggedIn_id });
                 })
                 .then(() => {
                     return this.summarizeBeads();
@@ -96,8 +98,13 @@ class Solution extends Component {
         }
     }
 
+    handleFavourite = () => {
+        const { hasFavourited } = this.state;
+            this.setState({ hasFavourited: !hasFavourited });
+    }
+
     render() {
-        const { title, avatar_url, username, image_url, beads, width_px, height_px, items, votes, hasVotedUp } = this.state;
+        const { title, avatar_url, username, image_url, beads, width_px, height_px, items, votes, hasVotedUp, hasFavourited, loggedIn_id } = this.state;
         return (
             <div id="solution" className="background-color-secondary-1-0">
                 <div className="hero background-color-secondary-1-1">
@@ -112,6 +119,7 @@ class Solution extends Component {
                     </div>
                     <h1>Votes: {votes}</h1>
                     <button class="button" onClick={this.handleVote}>{!hasVotedUp? "Vote Up": "Unvote"}</button>
+                    <button class="button" onClick={this.handleFavourite} disabled={loggedIn_id === '' ? true: false } >{!hasFavourited? "Favourite": "Unfavourite"}</button>
                     <div className="hero background-color-secondary-1-1">
                         <p>Created By:</p>
                     </div>
