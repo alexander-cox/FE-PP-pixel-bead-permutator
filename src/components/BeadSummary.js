@@ -26,7 +26,7 @@ class BeadSummary extends Component {
     render() {
         const { quantity, r, g, b, colour_name, brand, style, size, bead_id } = this.state;
         return (
-            <div className="box">
+            <div id={bead_id} className="box">
                 <div className="columns">
                     <div className="column bead-colour-div" style={{ backgroundColor: `rgb(${r},${g},${b})` }}>
                         <p className="p-inv">ID: {bead_id}</p>
