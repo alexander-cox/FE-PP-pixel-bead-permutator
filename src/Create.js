@@ -11,7 +11,6 @@ class Create extends Component {
         image_url_input: '',
         width_input: '60',
         height_input: '60',
-        title_input: '',
         tag_input: '',
         image_url: '',
         width_px: '0',
@@ -52,7 +51,7 @@ class Create extends Component {
 
     handleTitleInputChange = (e) => {
         const { target: { value } } = e;
-        this.setState({ title_input: value });
+        this.setState({ title: value });
     }
 
     handleTagInputChange = (e) => {
@@ -167,7 +166,7 @@ class Create extends Component {
                 <Redirect to={`solutions/${solution_id}`} />
             )
         } else {
-            const { image_url, width_px, height_px, image_url_input, width_input, height_input, tempSolution, items, title_input, tag_input, tags } = this.state;
+            const { image_url, width_px, height_px, image_url_input, width_input, height_input, tempSolution, items, title, tag_input, tags } = this.state;
             const total = this.calcTotalBeads();
             return (
                 <div className="background-color-primary-0">
@@ -219,7 +218,7 @@ class Create extends Component {
                         <div className="field">
                             <label className="label">Solution Title:</label>
                             <div className="control">
-                                <input className="input is-small" type="text" placeholder="Text input" value={title_input} onChange={this.handleTitleInputChange} />
+                                <input className="input is-small" type="text" placeholder="Text input" value={title} onChange={this.handleTitleInputChange} />
                             </div>
                             <br />
                             <label className="label">Solution Hashtags:</label>
