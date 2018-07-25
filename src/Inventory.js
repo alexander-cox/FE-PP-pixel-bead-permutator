@@ -6,7 +6,7 @@ import AdditionalBead from './components/AdditionalBead';
 class Inventory extends Component {
     state = {
         username: '',
-        user_id: 0,
+        user_id: '',
         items: [],
         new_beads: []
     }
@@ -49,6 +49,25 @@ class Inventory extends Component {
         return console.dir(target);
     }
 
+    postBeadToInventory = (bead_id, amount) => {
+        const { user_id } = this.state;
+        const invObj = {
+            users_id: +user_id,
+            bead_id: +bead_id,
+            quantity: +amount
+        };
+        fetch('http://localhost:3000/api/inventory', {
+            method: 'POST',
+            body: JSON.stringify(invObj),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(() => this.fetchInventoryData(user_id));
+    }
+
     render() {
         const { username, items, new_beads } = this.state;
         const total = this.getTotalBeads();
@@ -63,16 +82,7 @@ class Inventory extends Component {
                         <Pictogram items={items} total={total} resetInventoryState={this.resetInventoryState} />
                         <div className="inventory-add background-color-complement-3">
                             <h1 id="inv_id_h1">Add To Your Inventory:</h1>
-                            <div class="bead_shop">
-                                {
-                                    new_beads.map((bead) => {
-                                        return (
-                                            <AdditionalBead bead={bead} />
-                                        )
-                                    })
-                                }
-
-                            </div>
+                            <AdditionalBeadList new_beads={new_beads} postBeadToInventory={this.postBeadToInventory} />
                         </div>
                     </div>
                 </div>
@@ -82,3 +92,19 @@ class Inventory extends Component {
 }
 
 export default Inventory;
+
+function AdditionalBeadList(props) {
+    const { new_beads, postBeadToInventory } = props;
+    return (
+        <div class="bead_shop">
+            {
+                new_beads.map((bead) => {
+                    return (
+                        <AdditionalBead key={"Add" + bead.id} bead={bead} postBeadToInventory={postBeadToInventory} />
+                    )
+                })
+            }
+
+        </div>
+    );
+}
