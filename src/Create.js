@@ -8,6 +8,7 @@ class Create extends Component {
     state = {
         solution_id: '',
         loggedIn_id: '',
+        title: '',
         image_url_input: '',
         width_input: '60',
         height_input: '60',
