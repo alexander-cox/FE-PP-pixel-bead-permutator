@@ -48,9 +48,9 @@ class Solution extends Component {
         return (
             tagArr.map((tag, i) => {
                 return (
-                    <div key={i} class="control hashtag">
-                        <div class="tags has-addons">
-                            <span class="tag">#{tag}</span>
+                    <div key={i} className="control hashtag">
+                        <div className="tags has-addons">
+                            <span className="tag">#{tag}</span>
                         </div>
                     </div>
                 )
@@ -111,21 +111,21 @@ class Solution extends Component {
                 </div>
                 <div id="solutionContent" className="">
                     <h1>{title || "Solution Title"}</h1>
-                    <div class="field is-grouped is-grouped-multiline hashtags">
+                    <div className="field is-grouped is-grouped-multiline hashtags">
                         {
                             this.splitTagsToComponents()
                         }
                     </div>
                     <h1>Votes: {votes}</h1>
-                    <button class="button" onClick={this.handleVote}>{!hasVotedUp? "Vote Up": "Unvote"}</button>
-                    <button class="button" onClick={this.handleFavourite} disabled={loggedIn_id === '' ? true: false } >{!hasFavourited? "Favourite": "Unfavourite"}</button>
+                    <button className="button" onClick={this.handleVote}>{!hasVotedUp? "Vote Up": "Unvote"}</button>
+                    <button className="button" onClick={this.handleFavourite} disabled={loggedIn_id === '' ? true: false } >{!hasFavourited? "Favourite": "Unfavourite"}</button>
                     <div className="hero background-color-secondary-1-1">
                         <p>Created By:</p>
                     </div>
                     <div id="solution-user-box" className="box background-color-secondary-1-3">
-                        <article id="user-article" class="media">
+                        <article id="user-article" className="media">
                             <div className="">
-                                <figure id="solution-avatar" class="image is-64x64">
+                                <figure id="solution-avatar" className="image is-64x64">
                                     <img src={avatar_url || require('./images/default_avatar.png')} alt={"avatar for " + username} />
                                 </figure>
                             </div>
@@ -149,11 +149,11 @@ class Solution extends Component {
                     <div className="hero background-color-secondary-1-1">
                         <p>Beads Summary:</p>
                     </div>
-                    <div class="bead_shop">
+                    <div className="bead_shop">
                         {
                             items.map((item) => {
                                 return (
-                                    <BeadSummary bead={item} />
+                                    <BeadSummary key={item.bead_id} bead={item} />
                                 )
                             })
                         }
