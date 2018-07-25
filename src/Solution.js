@@ -158,7 +158,6 @@ class Solution extends Component {
                                 )
                             })
                         }
-
                     </div>
 
                 </div>
