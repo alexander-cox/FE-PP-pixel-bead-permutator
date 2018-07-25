@@ -20,12 +20,20 @@ class Create extends Component {
 
     handleWidthInputChange = (e) => {
         const { target: { value } } = e;
-        this.setState({ width_input: value });
+        if (+value > 100) {
+            this.setState({ width_input: '100' });
+        } else {
+            this.setState({ width_input: value });
+        }
     }
 
     handleHeightInputChange = (e) => {
         const { target: { value } } = e;
-        this.setState({ height_input: value });
+        if (+value > 100) {
+            this.setState({ height_input: '100' });
+        } else {
+            this.setState({ height_input: value });
+        }
     }
 
     handleURLInputChange = (e) => {
