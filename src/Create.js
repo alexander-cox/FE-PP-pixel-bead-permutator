@@ -5,6 +5,7 @@ import './Create.css';
 
 class Create extends Component {
     state = {
+        loggedIn_id: '',
         image_url_input: '',
         width_input: '60',
         height_input: '60',
@@ -16,6 +17,11 @@ class Create extends Component {
         tempSolution: [],
         items: [],
         tags: []
+    }
+
+    componentDidMount = () => {
+        const { loggedIn_id } = this.props;
+        this.setState({ loggedIn_id });
     }
 
     handleWidthInputChange = (e) => {
@@ -64,10 +70,10 @@ class Create extends Component {
     removeHashtag = (tag) => {
         const { tags } = this.state;
         const newTags = tags.reduce((acc, curr) => {
-           if (curr !== tag) {
-               acc.push(curr);
-           }
-           return acc;
+            if (curr !== tag) {
+                acc.push(curr);
+            }
+            return acc;
         }, []);
         this.setState({ tags: newTags });
     }
@@ -109,6 +115,36 @@ class Create extends Component {
         return items.reduce((acc, item) => {
             return acc + item.quantity;
         }, 0);
+    }
+
+    submitSolutions = () => {
+        const { title, image_url, width_px, height_px, tags, loggedIn_id } = this.state;
+        const brand = 'Hama';
+        const is_public = true;
+        const users_id = +loggedIn_id;
+        if (users_id) {
+            const solutionObj = {
+                title,
+                users_id,
+                image_url,
+                is_public,
+                tags: tags.join(' '),
+                brand,
+                width_px,
+                height_px
+            }
+            fetch('http://localhost:3000/api/solutions', {
+                method: 'POST',
+                body: JSON.stringify(solutionObj),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(solution => {
+                console.log(solution);
+            })
+        }
     }
 
     render() {
@@ -180,9 +216,9 @@ class Create extends Component {
                                 </div>
                             </div>
                         </div>
-                            <TagList tags={tags} removeHashtag={this.removeHashtag} />
+                        <TagList tags={tags} removeHashtag={this.removeHashtag} />
                         <div className='card-content is-flex is-horizontal-center'>
-                            <input className="button button-create" type="submit" value="Submit Solution" />
+                            <input className="button button-create" type="submit" value="Submit Solution" onClick={() => this.submitSolutions()} />
                         </div>
                     </div>
                 </div>
