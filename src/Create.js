@@ -6,6 +6,7 @@ import './Create.css';
 
 class Create extends Component {
     state = {
+        solution_id: '',
         loggedIn_id: '',
         image_url_input: '',
         width_input: '60',
@@ -17,7 +18,8 @@ class Create extends Component {
         height_px: '0',
         tempSolution: [],
         items: [],
-        tags: []
+        tags: [],
+        completed: false
     }
 
     componentDidMount = () => {
@@ -140,98 +142,108 @@ class Create extends Component {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())
-            .then(({id}) => {
-                return fetch(`http://localhost:3000/api/beads/${id}`, {
-                    method: 'POST',
-                    body: JSON.stringify(tempSolution),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                .then(res => res.json())
+                .then(({ id }) => {
+                    return fetch(`http://localhost:3000/api/beads/${id}`, {
+                        method: 'POST',
+                        body: JSON.stringify(tempSolution),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
                 })
-            })
-            .then(res => res.json())
-            .then(({solution_id}) => <Redirect to={`/solutions/${solution_id}`} />)
+                .then(res => res.json())
+                .then(({ solution_id }) => {
+                    console.log('*****', 'redirecting to solution: ', solution_id);
+                    this.setState({ completed: true, solution_id });
+                })
         }
     }
 
     render() {
-        const { image_url, width_px, height_px, image_url_input, width_input, height_input, tempSolution, items, title_input, tag_input, tags } = this.state;
-        const total = this.calcTotalBeads();
-        return (
-            <div className="background-color-primary-0">
-                <div className="hero background-color-primary-2">
-                    <p>Create some Pixel Art!</p>
-                </div>
-                <div id="CreateForm" >
-                    <div className="field">
-                        <label className="label">Image URL:</label>
-                        <div className="control">
-                            <input className="input is-small" type="text" placeholder="Text input" value={image_url_input} onChange={this.handleURLInputChange} />
-                        </div>
-                        <div className='card-content is-flex is-horizontal-center'>
-                            <input className="button button-create" type="submit" value="Load Image" onClick={this.loadImage} />
-                        </div>
-                        <div className='card-content is-flex is-horizontal-center'>
-                            <figure className="image is-128x128 create-image">
-                                <img src={image_url || require('./images/PBP-logo-3.png')} alt='temp solution' />
-                            </figure>
-                        </div>
-                        <div className="columns">
-                            <div className="column">
-                                <label className="label">Width (beads):</label>
-                                <input className="input is-small" type="text" placeholder="Text input" value={width_input} onChange={this.handleWidthInputChange} />
-                            </div>
-                            <div className="column">
-                                <label className="label">Height (beads):</label>
-                                <input className="input is-small" type="text" placeholder="Text input" value={height_input} onChange={this.handleHeightInputChange} />
-                            </div>
-                        </div>
-                        <div className='card-content is-flex is-horizontal-center'>
-                            <input className="button button-create" type="submit" value="Generate Solution" onClick={this.fetchTempSolution} />
-                        </div>
+        if (this.state.completed) {
+            const { solution_id } = this.state;
+            return (
+                <Redirect to={`solutions/${solution_id}`} />
+            )
+        } else {
+            const { image_url, width_px, height_px, image_url_input, width_input, height_input, tempSolution, items, title_input, tag_input, tags } = this.state;
+            const total = this.calcTotalBeads();
+            return (
+                <div className="background-color-primary-0">
+                    <div className="hero background-color-primary-2">
+                        <p>Create some Pixel Art!</p>
                     </div>
-                    <h1 id="create-beads-h1">{total > 0 ? ("Solution:") : ''}</h1>
-                </div>
-                <Pixel_Board board={tempSolution} width={width_px} height={height_px} image_url={image_url} />
-                <div id="CreateForm" >
-                    <h1 id="create-beads-h1">{total > 0 ? ("Beads required: " + total + " total") : ''}</h1>
-                    <div className="bead_shop">
-                        {
-                            items.map((item) => {
-                                return (
-                                    <BeadSummary bead={item} />
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="field">
-                        <label className="label">Solution Title:</label>
-                        <div className="control">
-                            <input className="input is-small" type="text" placeholder="Text input" value={title_input} onChange={this.handleTitleInputChange} />
-                        </div>
-                        <br />
-                        <label className="label">Solution Hashtags:</label>
-                        <div className="columns">
-                            <div className="column">
-                                <div className="control">
-                                    <input className="input is-small" type="text" placeholder="Text input" value={tag_input} onChange={this.handleTagInputChange} />
+                    <div id="CreateForm" >
+                        <div className="field">
+                            <label className="label">Image URL:</label>
+                            <div className="control">
+                                <input className="input is-small" type="text" placeholder="Text input" value={image_url_input} onChange={this.handleURLInputChange} />
+                            </div>
+                            <div className='card-content is-flex is-horizontal-center'>
+                                <input className="button button-create" type="submit" value="Load Image" onClick={this.loadImage} />
+                            </div>
+                            <div className='card-content is-flex is-horizontal-center'>
+                                <figure className="image is-128x128 create-image">
+                                    <img src={image_url || require('./images/PBP-logo-3.png')} alt='temp solution' />
+                                </figure>
+                            </div>
+                            <div className="columns">
+                                <div className="column">
+                                    <label className="label">Width (beads):</label>
+                                    <input className="input is-small" type="text" placeholder="Text input" value={width_input} onChange={this.handleWidthInputChange} />
+                                </div>
+                                <div className="column">
+                                    <label className="label">Height (beads):</label>
+                                    <input className="input is-small" type="text" placeholder="Text input" value={height_input} onChange={this.handleHeightInputChange} />
                                 </div>
                             </div>
-                            <div className="column">
-                                <div className=''>
-                                    <input className="button button-create is-small" type="submit" value="Add Hashtag" onClick={this.addHashtag} />
-                                </div>
+                            <div className='card-content is-flex is-horizontal-center'>
+                                <input className="button button-create" type="submit" value="Generate Solution" onClick={this.fetchTempSolution} />
                             </div>
                         </div>
-                        <TagList tags={tags} removeHashtag={this.removeHashtag} />
-                        <div className='card-content is-flex is-horizontal-center'>
-                            <input className="button button-create" type="submit" value="Submit Solution" onClick={() => this.submitSolutions()} />
+                        <h1 id="create-beads-h1">{total > 0 ? ("Solution:") : ''}</h1>
+                    </div>
+                    <Pixel_Board board={tempSolution} width={width_px} height={height_px} image_url={image_url} />
+                    <div id="CreateForm" >
+                        <h1 id="create-beads-h1">{total > 0 ? ("Beads required: " + total + " total") : ''}</h1>
+                        <div className="bead_shop">
+                            {
+                                items.map((item) => {
+                                    return (
+                                        <BeadSummary bead={item} />
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="field">
+                            <label className="label">Solution Title:</label>
+                            <div className="control">
+                                <input className="input is-small" type="text" placeholder="Text input" value={title_input} onChange={this.handleTitleInputChange} />
+                            </div>
+                            <br />
+                            <label className="label">Solution Hashtags:</label>
+                            <div className="columns">
+                                <div className="column">
+                                    <div className="control">
+                                        <input className="input is-small" type="text" placeholder="Text input" value={tag_input} onChange={this.handleTagInputChange} />
+                                    </div>
+                                </div>
+                                <div className="column">
+                                    <div className=''>
+                                        <input className="button button-create is-small" type="submit" value="Add Hashtag" onClick={this.addHashtag} />
+                                    </div>
+                                </div>
+                            </div>
+                            <TagList tags={tags} removeHashtag={this.removeHashtag} />
+                            <div className='card-content is-flex is-horizontal-center'>
+                                <input className="button button-create" type="submit" value="Submit Solution" onClick={() => this.submitSolutions()} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 
