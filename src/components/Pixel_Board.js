@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
 import './Pixel_Board.css';
 
 class Pixel_Board extends Component {
@@ -16,8 +17,8 @@ class Pixel_Board extends Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        if (this.props.board.length !== prevProps.board.length) {
-            const { board, width, height } = this.props;
+        const { board, image_url, width, height } = this.props;
+        if ((board.length !== prevProps.board.length) || (image_url !== prevProps.image_url) || (width !== prevProps.width) || (height !== prevProps.height)) {
             const grid_styles = this.generateGridStyling(width, height);
             return this.setState({ board, width, height, grid_styles });
         }
@@ -39,7 +40,7 @@ class Pixel_Board extends Component {
                     {
                         board.map(pix => {
                             return (
-                                <div key={pix.id} className={`grid-item ${pix.colour_name ? pix.colour_name : 'empty'}`} style={{ backgroundColor: `rgb(${pix.r}, ${pix.g}, ${pix.b})` }}>
+                                <div key={uuidv4()} className={`grid-item ${pix.colour_name ? pix.colour_name : 'empty'}`} style={{ backgroundColor: `rgb(${pix.r}, ${pix.g}, ${pix.b})` }}>
                                     <p>{pix.bead_id}</p>
                                     <p>{pix.colour_name}</p>
                                     <p>{"("+ pix.x + "," + pix.y + ")"}</p>
