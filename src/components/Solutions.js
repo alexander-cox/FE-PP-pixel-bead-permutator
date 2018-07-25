@@ -3,11 +3,11 @@ import Mini_Solution from './Mini_Solution';
 import './Solutions.css';
 
 const Solutions = (props) => {
-    //const { solutions } = props;
+    const { solutions } = props;
     return ( 
         <div className="solutions background-color-secondary-1-3">
             {
-                props.solutions.map(s => <Mini_Solution solution={s} />)
+                solutions.map(s => <Mini_Solution key={s.id} solution={s} />)
             }
         </div>
      );

@@ -96,7 +96,7 @@ export default Inventory;
 function AdditionalBeadList(props) {
     const { new_beads, postBeadToInventory } = props;
     return (
-        <div class="bead_shop">
+        <div className="bead_shop">
             {
                 new_beads.map((bead) => {
                     return (

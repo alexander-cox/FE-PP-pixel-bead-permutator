@@ -54,19 +54,19 @@ class ProgressBar extends Component {
     render() {
         const { id, bead_id, quantity, r, g, b, total, colour_name, amount } = this.state;
         return (
-            <div class="box">
-                <div class="columns">
-                    <div class="column is-one-quarter">
+            <div className="box">
+                <div className="columns">
+                    <div className="column is-one-quarter">
                         <p className="p-beads">{colour_name}:</p>
                         <p id="bead-quantity" className="p-beads">{quantity} Beads</p>
                     </div>
-                    <div class="column is-one-half progress-div" style={{ backgroundColor: `rgb(${r},${g},${b})` }}>
-                        <progress class="progress is-small" value={quantity} max={total}></progress>
+                    <div className="column is-one-half progress-div" style={{ backgroundColor: `rgb(${r},${g},${b})` }}>
+                        <progress className="progress is-small" value={quantity} max={total}></progress>
                     </div>
-                    <div class="column is-one-quarter">
-                        <input id="amount" class="input is-small" type="text" placeholder="Amount" onChange={this.handleAmountChange} value={amount} />
-                        <a class="button is-danger is-small" onClick={this.handleDecrement}>-</a>
-                        <a class="button is-primary is-small" onClick={this.handleIncrement}>+</a>
+                    <div className="column is-one-quarter">
+                        <input id="amount" className="input is-small" type="text" placeholder="Amount" onChange={this.handleAmountChange} value={amount} />
+                        <a className="button is-danger is-small" onClick={this.handleDecrement}>-</a>
+                        <a className="button is-primary is-small" onClick={this.handleIncrement}>+</a>
                     </div>
                 </div>
             </div>

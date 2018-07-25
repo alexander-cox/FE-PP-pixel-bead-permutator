@@ -3,7 +3,7 @@ import ProgressBar from './ProgressBar';
 import './Pictogram.css';
 
 const Pictogram = ({total, items, resetInventoryState}) => (
-    <div class="pictogram">
+    <div className="pictogram">
         {
             items.map((item) => {
                 return (

@@ -4,13 +4,13 @@ import './Mini_Solution.css';
 const Mini_Solution = (props) => {
     const { id, title, image_url, votes, tags, brand, width_px, height_px, username } = props.solution;
     return (
-        <div class="box">
-            <article id="mini_solution" class="media">
-                <figure class="media-left image is-96x96 solution_image">
+        <div className="box">
+            <article id="mini_solution" className="media">
+                <figure className="media-left image is-96x96 solution_image">
                         <img src={image_url} alt='solution preview' />
                 </figure>
-                <div class="media-content">
-                    <div class="content">
+                <div className="media-content">
+                    <div className="content">
                         <p>
                             <strong>{title}</strong>
                             <br />
@@ -20,7 +20,7 @@ const Mini_Solution = (props) => {
                         </p>
                     </div>
                 </div>
-                <figure class="media-left image is-96x96 solution_image">
+                <figure className="media-left image is-96x96 solution_image">
                         <img src={image_url} alt='user avatar' />
                 </figure>
             </article>
