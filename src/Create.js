@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import Pixel_Board from './components/Pixel_Board';
 import BeadSummary from './components/BeadSummary';
 import './Create.css';
@@ -86,7 +87,6 @@ class Create extends Component {
     fetchTempSolution = () => {
         const { image_url, width_input, height_input } = this.state;
         const fetchURL = `http://localhost:3000/api/beads/temp?width=${width_input}&height=${height_input}&url=${image_url}`;
-        console.log(fetchURL);
         fetch(fetchURL)
             .then(res => res.json())
             .then(tempSolution => this.setState({ tempSolution, width_px: width_input, height_px: height_input }))
@@ -118,7 +118,7 @@ class Create extends Component {
     }
 
     submitSolutions = () => {
-        const { title, image_url, width_px, height_px, tags, loggedIn_id } = this.state;
+        const { title, image_url, width_px, height_px, tags, loggedIn_id, tempSolution } = this.state;
         const brand = 'Hama';
         const is_public = true;
         const users_id = +loggedIn_id;
@@ -141,9 +141,17 @@ class Create extends Component {
                 }
             })
             .then(res => res.json())
-            .then(solution => {
-                console.log(solution);
+            .then(({id}) => {
+                return fetch(`http://localhost:3000/api/beads/${id}`, {
+                    method: 'POST',
+                    body: JSON.stringify(tempSolution),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
             })
+            .then(res => res.json())
+            .then(({solution_id}) => <Redirect to={`/solutions/${solution_id}`} />)
         }
     }
 
