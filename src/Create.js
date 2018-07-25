@@ -174,7 +174,7 @@ class Create extends Component {
                         </div>
                         <div className='card-content is-flex is-horizontal-center'>
                             <figure className="image is-128x128 create-image">
-                                <img src={image_url || require('./images/PBP-logo-3.png')} />
+                                <img src={image_url || require('./images/PBP-logo-3.png')} alt='temp solution' />
                             </figure>
                         </div>
                         <div className="columns">
@@ -196,7 +196,7 @@ class Create extends Component {
                 <Pixel_Board board={tempSolution} width={width_px} height={height_px} image_url={image_url} />
                 <div id="CreateForm" >
                     <h1 id="create-beads-h1">{total > 0 ? ("Beads required: " + total + " total") : ''}</h1>
-                    <div class="bead_shop">
+                    <div className="bead_shop">
                         {
                             items.map((item) => {
                                 return (
@@ -240,14 +240,14 @@ export default Create;
 const TagList = (props) => {
     const { tags, removeHashtag } = props;
     return (
-        <div class="field is-grouped is-grouped-multiline">
+        <div className="field is-grouped is-grouped-multiline">
             {
                 tags.map((tag, i) => {
                     return (
-                        <div key={i + tag} class="control">
-                            <div class="tags has-addons">
-                                <span class="tag">{tag}</span>
-                                <span class="tag is-delete" onClick={() => removeHashtag(tag)} ></span>
+                        <div key={i + tag} className="control">
+                            <div className="tags has-addons">
+                                <span className="tag">{tag}</span>
+                                <span className="tag is-delete" onClick={() => removeHashtag(tag)} ></span>
                             </div>
                         </div>
                     )

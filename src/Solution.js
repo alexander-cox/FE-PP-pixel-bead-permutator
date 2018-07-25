@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Solution.css';
 import Pixel_Board from './components/Pixel_Board';
-import Pictogram from './components/Pictogram';
 import BeadSummary from './components/BeadSummary';
 
 class Solution extends Component {

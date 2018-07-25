@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -11,7 +11,7 @@ const Title = (props) => {
     return (
         <nav id='toptitle' className="level title background-colour-neutral">
             <div className="level-left">
-                <figure class="image is-48x48 title-image">
+                <figure className="image is-48x48 title-image">
                     <img src={require("./images/PBP-logo-3.png")} />
                 </figure>
                 <div id="app-name" className="level-item has-text-centered">
@@ -22,7 +22,7 @@ const Title = (props) => {
                 <div className="level-item has-text-centered">
                     <p className="heading"><Link to='/' >{"User: " + (username || "New User")}</Link></p>
                 </div>
-                <figure class="image is-48x48 title-image">
+                <figure className="image is-48x48 title-image">
                     <img src={image_url || require( "./images/default_avatar.png")} />
                 </figure>
             </div>

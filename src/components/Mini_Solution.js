@@ -7,7 +7,7 @@ const Mini_Solution = (props) => {
         <div class="box">
             <article id="mini_solution" class="media">
                 <figure class="media-left image is-96x96 solution_image">
-                        <img src={image_url} />
+                        <img src={image_url} alt='solution preview' />
                 </figure>
                 <div class="media-content">
                     <div class="content">
@@ -21,7 +21,7 @@ const Mini_Solution = (props) => {
                     </div>
                 </div>
                 <figure class="media-left image is-96x96 solution_image">
-                        <img src={image_url} />
+                        <img src={image_url} alt='user avatar' />
                 </figure>
             </article>
         </div>
