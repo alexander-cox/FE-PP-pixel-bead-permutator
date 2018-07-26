@@ -88,7 +88,7 @@ class Create extends Component {
 
     fetchTempSolution = () => {
         const { image_url, width_input, height_input } = this.state;
-        const fetchURL = `http://localhost:3000/api/beads/temp?width=${width_input}&height=${height_input}&url=${image_url}`;
+        const fetchURL = `https://pixel-bead-permutator.herokuapp.com/api/beads/temp?width=${width_input}&height=${height_input}&url=${image_url}`;
         fetch(fetchURL)
             .then(res => res.json())
             .then(tempSolution => this.setState({ tempSolution, width_px: width_input, height_px: height_input }))
@@ -135,7 +135,7 @@ class Create extends Component {
                 width_px,
                 height_px
             }
-            fetch('http://localhost:3000/api/solutions', {
+            fetch('https://pixel-bead-permutator.herokuapp.com/api/solutions', {
                 method: 'POST',
                 body: JSON.stringify(solutionObj),
                 headers: {
@@ -144,7 +144,7 @@ class Create extends Component {
             })
                 .then(res => res.json())
                 .then(({ id }) => {
-                    return fetch(`http://localhost:3000/api/beads/${id}`, {
+                    return fetch(`https://pixel-bead-permutator.herokuapp.com/api/beads/${id}`, {
                         method: 'POST',
                         body: JSON.stringify(tempSolution),
                         headers: {

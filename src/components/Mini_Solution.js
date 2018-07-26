@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Mini_Solution.css';
 
 const Mini_Solution = (props) => {
+    console.log(props.solution);
     const { id, title, image_url, votes, tags, brand, width_px, height_px, username } = props.solution;
     return (
         <div className="box">

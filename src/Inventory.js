@@ -19,8 +19,8 @@ class Inventory extends Component {
 
     fetchInventoryData = (user_id) => {
         Promise.all([
-            fetch(`http://localhost:3000/api/inventory/${user_id}`),
-            fetch('http://localhost:3000/api/beads')
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/inventory/${user_id}`),
+            fetch('https://pixel-bead-permutator.herokuapp.com/api/beads')
         ])
             .then(([items, beads]) => {
                 return Promise.all([items.json(), beads.json()])
@@ -56,7 +56,7 @@ class Inventory extends Component {
             bead_id: +bead_id,
             quantity: +amount
         };
-        fetch('http://localhost:3000/api/inventory', {
+        fetch('https://pixel-bead-permutator.herokuapp.com/api/inventory', {
             method: 'POST',
             body: JSON.stringify(invObj),
             headers: {

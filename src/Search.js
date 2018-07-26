@@ -12,7 +12,7 @@ class Search extends Component {
         this.fetchAll();
     }
     fetchAll = () => {
-        fetch('http://localhost:3000/api/solutions')
+        fetch('https://pixel-bead-permutator.herokuapp.com/api/solutions')
         .then((solutions) => solutions.json())
         .then(solutions => this.setState({ solutions }));
     }
@@ -31,7 +31,7 @@ class Search extends Component {
         if (title === '' && tags === '') {
             this.fetchAll();
         } else {
-            fetch(`http://localhost:3000/api/solutions?title=${title}&tags=${tags}`)
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/solutions?title=${title}&tags=${tags}`)
             .then((solutions) => solutions.json())
             .then(solutions => this.setState({ solutions }));
         }

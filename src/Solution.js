@@ -29,9 +29,9 @@ class Solution extends Component {
     componentDidMount = () => {
         const { match: { params: { solution_id } }, loggedIn_id } = this.props;
         return Promise.all([
-            fetch(`http://localhost:3000/api/solutions/${solution_id}`),
-            fetch(`http://localhost:3000/api/beads/${solution_id}`),
-            fetch('http://localhost:3000/api/beads')])
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/solutions/${solution_id}`),
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/beads/${solution_id}`),
+            fetch('https://pixel-bead-permutator.herokuapp.com/api/beads')])
             .then(([solutions, beads, beadInfo]) => Promise.all([solutions.json(), beads.json(), beadInfo.json()])
                 .then(([solution, beads, beadInfo]) => {
                     return this.setState({ ...solution, beads, beadInfo, loggedIn_id });
@@ -83,13 +83,13 @@ class Solution extends Component {
     handleVote = () => {
         const { hasVotedUp, id } = this.state;
         if(!hasVotedUp) {
-            fetch(`http://localhost:3000/api/solutions/${id}/votes`, { method: 'PUT'})
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/solutions/${id}/votes`, { method: 'PUT'})
             .then(res => res.json())
             .then(({votes}) => {
                 this.setState({ hasVotedUp: !hasVotedUp, votes });
             })
         } else {
-            fetch(`http://localhost:3000/api/solutions/${id}/votes?decrement=true`, { method: 'PUT'})
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/solutions/${id}/votes?decrement=true`, { method: 'PUT'})
             .then(res => res.json())
             .then(({votes}) => {
                 this.setState({ hasVotedUp: !hasVotedUp, votes });

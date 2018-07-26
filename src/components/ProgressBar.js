@@ -33,7 +33,7 @@ class ProgressBar extends Component {
         const { id, amount } = this.state;
         const increment = +amount;
         if (increment > 0) {
-            fetch(`http://localhost:3000/api/inventory/${id}/?amount=${increment}`, { method: 'PUT' })
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/inventory/${id}/?amount=${increment}`, { method: 'PUT' })
                 .then(() => {
                     return this.props.resetInventoryState();
                 })
@@ -44,7 +44,7 @@ class ProgressBar extends Component {
         const { id, amount } = this.state;
         const decrement = +amount;
         if (decrement > 0) {
-            fetch(`http://localhost:3000/api/inventory/${id}/?amount=${decrement}&decrement=true`, { method: 'PUT' })
+            fetch(`https://pixel-bead-permutator.herokuapp.com/api/inventory/${id}/?amount=${decrement}&decrement=true`, { method: 'PUT' })
                 .then(() => {
                     return this.props.resetInventoryState();
                 })
