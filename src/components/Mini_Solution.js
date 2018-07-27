@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Mini_Solution.css';
 
 class Mini_Solution extends Component {
@@ -30,7 +31,7 @@ class Mini_Solution extends Component {
                     </figure>
                     <div className="media-content">
                         <div className="content">
-                                    <h1>{title}</h1>
+                                    <Link to={`/solutions/${id}`}><h1>{title}</h1></Link>
                                     <p><strong>Votes: </strong>{votes}</p>
                                     <p>
                                         {
