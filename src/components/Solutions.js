@@ -7,7 +7,11 @@ const Solutions = (props) => {
     return ( 
         <div className="solutions background-color-secondary-1-3">
             {
-                solutions.map(s => <Mini_Solution key={s.id} solution={s} />)
+                solutions.map(s => {
+                    return (
+                    <Mini_Solution key={s.id} solution={s} />
+                    )
+                })
             }
         </div>
      );

@@ -16,3 +16,12 @@
     border-color: #826A06;
     border-width: 1px;
 }
+
+#mini_solution {
+    font-family: pixel;
+}
+
+#mini_solution strong {
+    font-family: pixel;
+    color: black;
+}
