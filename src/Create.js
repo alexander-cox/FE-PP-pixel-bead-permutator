@@ -176,6 +176,25 @@ class Create extends Component {
                     </div>
                     <div id="CreateForm" >
                         <div className="field">
+                            <label className="label">Solution Title:</label>
+                            <div className="control">
+                                <input className="input is-small" type="text" placeholder="Text input" value={title} onChange={this.handleTitleInputChange} />
+                            </div>
+                            <br />
+                            <label className="label">Solution Hashtags:</label>
+                            <div className="columns">
+                                <div className="column">
+                                    <div className="control">
+                                        <input className="input is-small" type="text" placeholder="Text input" value={tag_input} onChange={this.handleTagInputChange} />
+                                    </div>
+                                </div>
+                                <div className="column">
+                                    <div className=''>
+                                        <input className="button button-create is-small" type="submit" value="Add Hashtag" onClick={this.addHashtag} />
+                                    </div>
+                                </div>
+                            </div>
+                            <TagList tags={tags} removeHashtag={this.removeHashtag} />
                             <label className="label">Image URL:</label>
                             <div className="control">
                                 <input className="input is-small" type="text" placeholder="Text input" value={image_url_input} onChange={this.handleURLInputChange} />
@@ -217,28 +236,13 @@ class Create extends Component {
                             }
                         </div>
                         <div className="field">
-                            <label className="label">Solution Title:</label>
-                            <div className="control">
-                                <input className="input is-small" type="text" placeholder="Text input" value={title} onChange={this.handleTitleInputChange} />
-                            </div>
-                            <br />
-                            <label className="label">Solution Hashtags:</label>
-                            <div className="columns">
-                                <div className="column">
-                                    <div className="control">
-                                        <input className="input is-small" type="text" placeholder="Text input" value={tag_input} onChange={this.handleTagInputChange} />
+                            {
+                                tempSolution.length > 0 ? (
+                                    <div className='card-content is-flex is-horizontal-center'>
+                                        <input className="button button-create" type="submit" value="Submit Solution" onClick={() => this.submitSolutions()} />
                                     </div>
-                                </div>
-                                <div className="column">
-                                    <div className=''>
-                                        <input className="button button-create is-small" type="submit" value="Add Hashtag" onClick={this.addHashtag} />
-                                    </div>
-                                </div>
-                            </div>
-                            <TagList tags={tags} removeHashtag={this.removeHashtag} />
-                            <div className='card-content is-flex is-horizontal-center'>
-                                <input className="button button-create" type="submit" value="Submit Solution" onClick={() => this.submitSolutions()} />
-                            </div>
+                                ) : ''
+                            }
                         </div>
                     </div>
                 </div>
