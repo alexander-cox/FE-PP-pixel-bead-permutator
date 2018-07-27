@@ -10,7 +10,8 @@ class BeadSummary extends Component {
         colour_name: '',
         style: '',
         size: '',
-        quantity: 0
+        quantity: 0,
+        quantity_out: 0
     }
 
     componentDidMount = () => {
@@ -24,7 +25,7 @@ class BeadSummary extends Component {
     }
 
     render() {
-        const { quantity, r, g, b, colour_name, brand, style, size, bead_id } = this.state;
+        const { quantity, r, g, b, colour_name, brand, style, size, bead_id, quantity_out } = this.state;
         return (
             <div id={bead_id} className="box">
                 <div className="columns">
@@ -39,6 +40,9 @@ class BeadSummary extends Component {
                         <p>Quantity Needed: {quantity}</p>
                     </div>
                 </div>
+                {
+                    quantity_out > 0  ? <p class="help is-danger">You need {quantity_out} more {colour_name} bead{quantity_out > 1? 's': ''} to make this solution!</p> : ''
+                }
             </div>
         );
     }
