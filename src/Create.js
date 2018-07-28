@@ -154,7 +154,6 @@ class Create extends Component {
                 })
                 .then(res => res.json())
                 .then(({ solution_id }) => {
-                    console.log('*****', 'redirecting to solution: ', solution_id);
                     this.setState({ completed: true, solution_id });
                 })
         }
